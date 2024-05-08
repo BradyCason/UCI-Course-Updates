@@ -38,15 +38,13 @@ class Updates(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         await member.create_dm()
-        await member.dm_channel.send(
-            f'Hi {member.name}, welcome to the UCI Course Notification Discord server! Please head over to the instructions channel to get started!'
-        )
+        await member.dm_channel.send(f'Hi {member.name}, welcome to the UCI Course Notification Discord server! \
+Please head over to the instructions channel to get started!')
 
-    @commands.command(help="Subscribes you to recieve notifications for a class.\n\nParameters:\n<department>: department of class. One problem with department \
-such as I&C SCI and CRM/LAW, since the & and / are reserved for URLs, you must use their URL encode representation. \
-I&C SCI -> I%26C SCI CRM/LAW -> CRM%2FLAW \n<course number>: Ex: 32A\n<term>: Fall, Winter, Spring, \
-Summer1, Summer2, or Summer10wk\n<year>: Ex: 2024\n<subscription type>: all, num_enrolled, status, or section_added. \
-Deafault is ALL.\n\nExample: !subscribe all compsci 161 fall 2024")
+    @commands.command(help="Subscribes you to recieve notifications for a class.\n\nParameters:\n<department>: \
+department of class. Department must not have any spaces. See #instruction for list of all departments.\n<course \
+number>: Ex: 32A\n<term>: Fall, Winter, Spring, Summer1, Summer2, or Summer10wk\n<year>: Ex: 2024\n<subscription \
+type>: all, num_enrolled, status, or section_added. Deafault is ALL.\n\nExample: !subscribe all compsci 161 fall 2024")
     async def subscribe(self, ctx, department: str, course_num: str, term: str, year: str, sub_type="ALL"):
         sub_type = sub_type.upper()
         department = department.upper()
@@ -61,14 +59,16 @@ Deafault is ALL.\n\nExample: !subscribe all compsci 161 fall 2024")
             destination = "general"
         else:
             destination = str(ctx.author)
-        new_sub = {"unsubscribe": False, "destination": destination, "subscription":{"type": sub_type, "author": str(ctx.author), "department": department, "course_num": course_num, "term": term, "year":year}}
+        new_sub = {"unsubscribe": False, "destination": destination, "subscription":\
+                   {"type": sub_type, "author": str(ctx.author), "department": department, \
+                    "course_num": course_num, "term": term, "year":year}}
         self.conn.rpush("subscription requests", json.dumps(new_sub))
 
-    @commands.command(help="Removes a subscription that you do not want.\n\nParameters:\n<department>: department of class. One problem with department \
-such as I&C SCI and CRM/LAW, since the & and / are reserved for URLs, you must use their URL encode representation. \
-I&C SCI -> I%26C SCI CRM/LAW -> CRM%2FLAW \n<course number>: Ex: 32A\n<term>: Fall, Winter, Spring, \
-Summer1, Summer2, or Summer10wk\n<year>: Ex: 2024\n<subscription type>: all, \
-num_enrolled, status, or section_added. Deafault is ALL.\n\nExample: !unsubscribe all compsci 161 fall 2024")
+    @commands.command(help="Removes a subscription that you do not want.\n\nParameters:\n<department>: \
+department of class. Department must not have any spaces. See #instruction for list of all departments.\
+\n<course number>: Ex: 32A\n<term>: Fall, Winter, Spring, Summer1, Summer2, or Summer10wk\n<year>: Ex: \
+2024\n<subscription type>: all, num_enrolled, status, or section_added. Deafault is ALL.\n\nExample: \
+!unsubscribe all compsci 161 fall 2024")
     async def unsubscribe(self, ctx, department: str, course_num: str, term: str, year: str, sub_type="ALL"):
         sub_type = sub_type.upper()
         department = department.upper()
@@ -82,7 +82,9 @@ num_enrolled, status, or section_added. Deafault is ALL.\n\nExample: !unsubscrib
             destination = "general"
         else:
             destination = str(ctx.author)
-        new_sub = {"unsubscribe": True, "destination": destination, "subscription":{"type": sub_type, "author": str(ctx.author), "department": department, "course_num": course_num, "term": term, "year":year}}
+        new_sub = {"unsubscribe": True, "destination": destination, \
+                   "subscription":{"type": sub_type, "author": str(ctx.author), "department": department, \
+                                   "course_num": course_num, "term": term, "year":year}}
         self.conn.rpush("subscription requests", json.dumps(new_sub))
 
     @commands.command(help="Shows all of your current subscriptions")
@@ -91,7 +93,8 @@ num_enrolled, status, or section_added. Deafault is ALL.\n\nExample: !unsubscrib
         this_subscriptions = []
         for sub in all_subscriptions:
             if sub["author"] == str(ctx.author):
-                this_subscriptions.append(f'Subscription Type: {sub["type"]} Course: {sub["department"]} {sub["course_num"]} {sub["term"]} {sub["year"]}')
+                this_subscriptions.append(f'Subscription Type: {sub["type"]} Course: {sub["department"]} \
+                                          {sub["course_num"]} {sub["term"]} {sub["year"]}')
         if this_subscriptions:
             await ctx.send(f"{ctx.author}, you are subscribed to:\n-" + "\n-".join(this_subscriptions))
         else:
