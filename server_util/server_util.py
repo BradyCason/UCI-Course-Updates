@@ -34,13 +34,4 @@ def print_all_watched_courses(conn):
 if __name__ == "__main__":
     conn = redis.Redis(host='localhost', port=6379, db=0)
     
-    # r.rpush("list", "Croatia")
-    # r.rpush("list", "Bahamas")
-
-    # while True:
-    #     while notification := conn.lpop("notifications"):
-    #         print("")
-    #         print(notification)
-    #         print("Subscriptions:")
-    #         print(conn.smembers("subscriptions"))
-    delete_all_subscriptions(conn)
+    # CODE HERE

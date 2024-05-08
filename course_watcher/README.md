@@ -1,2 +1,2 @@
 # course_watcher
-The role of the course_ watcher is to watch for course changes for all subscriptions, and push those notifications to the redis server. It is in a loop that reads and updates the database of current watched courses and creates new notifications if any changes match user subscriptions.
+The role of the course_watcher is to watch for course changes for all subscriptions, and push those notifications to the redis server. It is in a loop that reads and updates the database of current watched courses and creates new notifications if any changes match user subscriptions.
