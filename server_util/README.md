@@ -1,22 +1,8 @@
-Redis: Remote Dictionary Service
+# server_util
+Tools for debugging and interacting with server. This script is not run in the main application. It is just for debugging purposes.
 
-Note for admin:
-How to Start Server:
-cd C:\Users\brady\OneDrive\Documents
-redis-server.exe redis.windows.conf
-
-How to Stop Server:
-Ctrl + c
-
-
-Server databases:
-"subscription requests": {"unsubscribe": True, "subscription":{"department": department, "course_num": course_num, "term": term, "year":year, "author": str(ctx.author)}}
-
-"notifications": 
-{"destination": "user" or "general", "text": "string"}
-
-"subscriptions":
-{"type": "all", "author": "bradycason", "department": "COMPSCI", "course_num": "161", "term": "Fall", "year": "2024"}
-
-"watched courses":
-{"course": "COMPSCI 161 Fall 2024", "sections": []}
+# Form of data in redis server database
+- "subscription requests": `{"unsubscribe": bool, "subscription":{"department": str, "course_num": str, "term": str, "year":str, "author": str}}`
+- "notifications": `{"destination": "user" or "general", "text": str}`
+- "subscriptions": `{"type": str, "author": str, "department": str, "course_num": str, "term": str, "year": str}`
+- "watched courses": `{"course": "COMPSCI 161 Fall 2024", "sections": []}`
