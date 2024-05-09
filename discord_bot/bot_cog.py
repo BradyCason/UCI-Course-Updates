@@ -98,7 +98,7 @@ department of class. Department must not have any spaces. See #instruction for l
         for sub in all_subscriptions:
             if sub["author"] == str(ctx.author):
                 this_subscriptions.append(f'Subscription Type: {sub["type"]} Course: {sub["department"]} \
-                                          {sub["course_num"]} {sub["term"]} {sub["year"]}')
+{sub["course_num"]} {sub["term"]} {sub["year"]}')
         if this_subscriptions:
             await ctx.send(f"{ctx.author}, you are subscribed to:\n-" + "\n-".join(this_subscriptions))
         else:
