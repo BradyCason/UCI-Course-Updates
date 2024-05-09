@@ -6,12 +6,12 @@ def run_script(script_name):
     subprocess.run(["python", script_name])
 
 def run_redis_server():
-    redis_server_executable = r"C:\Users\brady\OneDrive\Documents\redis-server.exe"
-    redis_conf_file = r"C:\Users\brady\OneDrive\Documents\redis.windows.conf"
+    redis_server_executable = r"C:\Users\brady\OneDrive\Documents\redis\redis-server.exe"
+    redis_conf_file = r"C:\Users\brady\OneDrive\Documents\redis\redis.windows.conf"
     
     try:
         # Run Redis server
-        subprocess.run([redis_server_executable, redis_conf_file], cwd=r"C:\Users\brady\OneDrive\Documents", check=True)
+        subprocess.run([redis_server_executable, redis_conf_file], cwd=r"C:\Users\brady\OneDrive\Documents\redis", check=True)
     except subprocess.CalledProcessError as e:
         print("Error running Redis server:", e)
 
