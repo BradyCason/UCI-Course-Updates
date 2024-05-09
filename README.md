@@ -16,6 +16,7 @@ A collection of scripts and servers that work together to allow UCI students to 
 - Create a file named ".env" in the "discord_bot" folder. In the file write:
 `DISCORD_TOKEN=<Discord bot token>
 DISCORD_GUILD=<Discord seerver name>`
+- Change the directiory in run_uci_course_notifications.py to match the directory to your redis excecutable files. (I used redis for windows)
 - Then just run run_uci_course_notifications.py
 
 
