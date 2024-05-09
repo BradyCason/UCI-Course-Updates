@@ -40,6 +40,10 @@ class Updates(commands.Cog):
         await member.create_dm()
         await member.dm_channel.send(f'Hi {member.name}, welcome to the UCI Course Notification Discord server! \
 Please head over to the instructions channel to get started!')
+        
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        await ctx.send(str(error))
 
     @commands.command(help="Subscribes you to recieve notifications for a class.\n\nParameters:\n<department>: \
 department of class. Department must not have any spaces. See #instruction for list of all departments.\n<course \
